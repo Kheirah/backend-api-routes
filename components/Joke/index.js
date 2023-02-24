@@ -3,11 +3,9 @@ import { useRouter } from "next/router";
 
 export default function Joke() {
   const router = useRouter();
-  const { id } = router.query;
+  const { slug: id } = router.query;
 
-  const { data } = useSWR(
-    id ? `https://example-apis.vercel.app/api/bad-jokes/${id}` : null
-  );
+  const { data } = useSWR(id ? `/api/jokes/${id}` : null);
 
   if (!data) {
     return <h1>Loading...</h1>;
